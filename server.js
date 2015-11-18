@@ -31,8 +31,10 @@ app.get('/scrape', function(req, res) {
 
             var output = [];
 
-            $('form input').not('[type=submit]').each(function($field) {
-                console.log($field);
+            fields.forEach(function(field) {
+                console.log(field);
+                var thisType = $('[name=' +  + ']').attr('type');
+
             });
 
 
