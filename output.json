@@ -2,5 +2,43 @@
     "version": "AAAAAFb728Y=",
     "formId": "-8618499235200825344",
     "tenantName": "Rochester, Lisa",
-    "formType": "SignupForm"
+    "formType": "SignupForm",
+    "fields": [
+        {
+            "name": "Version",
+            "value": "AAAAAFb728Y="
+        },
+        {
+            "name": "id",
+            "value": "-8618499235200825344"
+        },
+        {
+            "name": "ObfuscatedMailingId",
+            "value": ""
+        },
+        {
+            "name": "TenantName",
+            "value": "Rochester, Lisa"
+        },
+        {
+            "name": "SourceCodeIds",
+            "value": ""
+        },
+        {
+            "name": "MarketSource",
+            "value": ""
+        },
+        {
+            "name": "formType",
+            "value": "SignupForm"
+        },
+        {
+            "name": "PostalCode.Value",
+            "value": ""
+        },
+        {
+            "name": "EmailAddress.Value",
+            "value": ""
+        }
+    ]
 }

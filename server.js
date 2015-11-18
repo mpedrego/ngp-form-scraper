@@ -16,13 +16,23 @@ app.get('/scrape', function(req, res) {
                 version: '',
                 formId: '',
                 tenantName: '',
-                formType: ''
+                formType: '',
+                fields: []
             };
 
             json.version =  $('#Version').val();
             json.formId =  $('#id').val();
             json.tenantName =  $('#TenantName').val();
             json.formType =  $('#formType').val();
+            json.fields = $('form').serializeArray();
+
+
+            var fields = $('form').serializeArray();
+
+            fields.forEach(function(field) {
+                console.log(field.attr('type'));
+            });
+
 
             fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
 
