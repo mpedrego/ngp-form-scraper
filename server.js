@@ -29,8 +29,10 @@ app.get('/scrape', function(req, res) {
 
             var fields = $('form').serializeArray();
 
-            fields.forEach(function(field) {
-                console.log(field.attr('type'));
+            var output = [];
+
+            $('form input').not('[type=submit]').each(function($field) {
+                console.log($field);
             });
 
 
