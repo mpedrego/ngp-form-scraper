@@ -24,19 +24,20 @@ app.get('/scrape', function(req, res) {
             json.formId =  $('#id').val();
             json.tenantName =  $('#TenantName').val();
             json.formType =  $('#formType').val();
-            json.fields = $('form').serializeArray();
+            
 
 
             var fields = $('form').serializeArray();
 
-            var output = [];
-
-            fields.forEach(function(field) {
-                console.log(field);
-                var thisType = $('[name=' +  + ']').attr('type');
-
+            var newFields = fields.map(function(field) {
+                var thisType = $('[name="' + field.name + '"]').attr('type');
+                field.type = thisType;
+                return field;
             });
 
+            console.log(newFields)
+
+            json.fields = newFields;
 
             fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
 
@@ -45,7 +46,7 @@ app.get('/scrape', function(req, res) {
             });
 
             // Finally, we'll just send out a message to the browser reminding you that this app does not have a UI.
-            res.send('Check your console!');
+            res.send(json);
 
         }
     });

@@ -6,39 +6,48 @@
     "fields": [
         {
             "name": "Version",
-            "value": "AAAAAFb728Y="
+            "value": "AAAAAFb728Y=",
+            "type": "hidden"
         },
         {
             "name": "id",
-            "value": "-8618499235200825344"
+            "value": "-8618499235200825344",
+            "type": "hidden"
         },
         {
             "name": "ObfuscatedMailingId",
-            "value": ""
+            "value": "",
+            "type": "hidden"
         },
         {
             "name": "TenantName",
-            "value": "Rochester, Lisa"
+            "value": "Rochester, Lisa",
+            "type": "hidden"
         },
         {
             "name": "SourceCodeIds",
-            "value": ""
+            "value": "",
+            "type": "hidden"
         },
         {
             "name": "MarketSource",
-            "value": ""
+            "value": "",
+            "type": "hidden"
         },
         {
             "name": "formType",
-            "value": "SignupForm"
+            "value": "SignupForm",
+            "type": "hidden"
         },
         {
             "name": "PostalCode.Value",
-            "value": ""
+            "value": "",
+            "type": "text"
         },
         {
             "name": "EmailAddress.Value",
-            "value": ""
+            "value": "",
+            "type": "email"
         }
     ]
 }
