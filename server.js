@@ -6,7 +6,7 @@ var app = express();
 
 app.get('/scrape', function(req, res) {
 
-    url = 'https://act.myngp.com/Forms/NoScript/-8618499235200825344';
+    var url = req.query.url ? req.query.url : 'https://act.myngp.com/Forms/NoScript/-8618499235200825344';
 
     request(url, function(error, response, html) {
         if (!error) {
