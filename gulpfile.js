@@ -7,7 +7,9 @@ var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var uglify = require('gulp-uglify');
 var ngmin = require('gulp-ngmin');
-var exec = require('child_process').exec;
+
+var reload = browserSync.reload;
+var nodemon = require('gulp-nodemon');
 
 gulp.task('sass', function () {
     gulp.src('app/assets/sass/**/*')
@@ -16,11 +18,9 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('app/assets/css'));
 });
 
-gulp.task('browser-sync', function() {
-    browserSync.init(["app/assets/css/*.css", 'app/**/*.js','app/**/*.html'], {
-        server: {
-            baseDir: "./app"
-        }
+gulp.task('browser-sync', ['nodemon'], function() {
+    browserSync.init(null, {
+        proxy: "localhost:8081"
     });
 });
 
@@ -55,13 +55,15 @@ gulp.task('deploy', ['build'],function() {
     return gulp.src('./build/**/*').pipe(ghpages());
 });
 
-gulp.task('server', function (cb) {
-  exec('node server.js', function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
-})
+gulp.task('nodemon', function (cb) {
+    var called = false;
+    return nodemon({script: 'server.js'}).on('start', function () {
+        if (!called) {
+            called = true;
+            cb();
+        }
+    });
+});
 
 gulp.task('default', ['sass', 'browser-sync'], function () {
     gulp.watch("app/assets/sass/*/*.scss", ['sass']);
