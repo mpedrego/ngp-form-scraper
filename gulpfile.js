@@ -7,6 +7,7 @@ var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 var uglify = require('gulp-uglify');
 var ngmin = require('gulp-ngmin');
+var exec = require('child_process').exec;
 
 gulp.task('sass', function () {
     gulp.src('app/assets/sass/**/*')
@@ -54,19 +55,13 @@ gulp.task('deploy', ['build'],function() {
     return gulp.src('./build/**/*').pipe(ghpages());
 });
 
-/**
- * serve the dev environment
- */
-gulp.task('serve-dev', function() {
-    serve({mode: 'dev'});
-});
-
-/**
- * serve the build environment
- */
-gulp.task('serve-build', function() {
-    serve({mode: 'build'});
-});
+gulp.task('server', function (cb) {
+  exec('node server.js', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+})
 
 gulp.task('default', ['sass', 'browser-sync'], function () {
     gulp.watch("app/assets/sass/*/*.scss", ['sass']);
