@@ -54,6 +54,20 @@ gulp.task('deploy', ['build'],function() {
     return gulp.src('./build/**/*').pipe(ghpages());
 });
 
+/**
+ * serve the dev environment
+ */
+gulp.task('serve-dev', function() {
+    serve({mode: 'dev'});
+});
+
+/**
+ * serve the build environment
+ */
+gulp.task('serve-build', function() {
+    serve({mode: 'build'});
+});
+
 gulp.task('default', ['sass', 'browser-sync'], function () {
     gulp.watch("app/assets/sass/*/*.scss", ['sass']);
 });

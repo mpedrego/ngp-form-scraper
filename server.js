@@ -3,8 +3,13 @@ var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
 var app = express();
+var environment = process.env.NODE_ENV;
 
-app.get('/scrape', function(req, res) {
+    app.use('/', express.static('./src/index.html'));
+    app.use(express.static('./src/'));
+
+
+app.get('/api', function(req, res) {
 
     var url = req.query.url ? req.query.url : 'https://act.myngp.com/Forms/NoScript/-8618499235200825344';
 
