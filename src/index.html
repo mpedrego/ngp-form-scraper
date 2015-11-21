@@ -27,13 +27,20 @@
                 </div>
                 <div ng-show="form.activeTab === 'html'">
                     <pre>
-                       <form novalidate method="POST" ng-action="https://act.myngp.com/Forms/NoScript/{{form.formId}}">
-                            <div class="form-group" ng-repeat="field in form.formFields.fields">
-                                <label ng-show="field.type !== 'hidden'">{{field.name}}</label>
-                                <input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}">
-                            </div>
-                            <input type="submit">
-                        </form> 
+                       &lt;form method="POST" action="https://act.myngp.com/Forms/NoScript/{{form.formId}}"&gt;
+                            <span ng-repeat="field in form.formFields.fields">
+                                <span ng-show="field.type !== 'hidden'">
+                                    &lt;div class="form-group"&gt;
+                                        &lt;label&gt;{{field.name}}&lt;/label&gt;
+                                        &lt;input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}"&gt;
+                                    &lt;/div&gt;
+                                </span>
+                                <span ng-show="field.type === 'hidden'">
+                                    &lt;input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}"&gt;
+                                </span>
+                            </span>
+                            &lt;input type="submit"&gt;
+                        &lt;/form&gt; 
                     </pre>
                 </div>
                 <div ng-show="form.activeTab === 'form'">
