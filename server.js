@@ -11,9 +11,12 @@ var environment = process.env.NODE_ENV;
 
 app.get('/api', function(req, res) {
 
-    var url = req.query.url ? req.query.url : 'https://act.myngp.com/Forms/NoScript/-8618499235200825344';
+    /* url format is https://act.myngp.com/Forms/NoScript/-8618499235200825344 */
 
-    request(url, function(error, response, html) {
+    var formId = req.query.formId ? req.query.formId : '-8618499235200825344',
+        formUrl = 'https://act.myngp.com/Forms/NoScript/' + formId;
+
+    request(formUrl, function(error, response, html) {
         if (!error) {
             var $ = cheerio.load(html);
 
