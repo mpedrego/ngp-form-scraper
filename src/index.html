@@ -26,10 +26,24 @@
                     <button type="button" class="btn btn-default" ng-click="form.activeTab = 'table'">Table</button>
                 </div>
                 <div ng-show="form.activeTab === 'html'">
-                    html
+                    <pre>
+                       <form novalidate method="POST" ng-action="https://act.myngp.com/Forms/NoScript/{{form.formId}}">
+                            <div class="form-group" ng-repeat="field in form.formFields.fields">
+                                <label ng-show="field.type !== 'hidden'">{{field.name}}</label>
+                                <input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}">
+                            </div>
+                            <input type="submit">
+                        </form> 
+                    </pre>
                 </div>
                 <div ng-show="form.activeTab === 'form'">
-                    form
+                    <form novalidate method="POST" ng-action="https://act.myngp.com/Forms/NoScript/{{form.formId}}">
+                        <div class="form-group" ng-repeat="field in form.formFields.fields">
+                            <label ng-show="field.type !== 'hidden'">{{field.name}}</label>
+                            <input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}">
+                        </div>
+                        <input type="submit">
+                    </form>
                 </div>
                 <div ng-show="form.activeTab === 'table'">
                     <h3>Form Fields</h3>
