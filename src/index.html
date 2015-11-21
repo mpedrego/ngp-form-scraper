@@ -10,21 +10,49 @@
         </div>
         <div class="jumbotron">
             <p>Type in the URL to your NGP form below</p>
-            {{url}}
+            <!-- https://act.myngp.com/Forms/7944614294361016320 -->
             <form novalidate name="form.mainForm" ng-submit="form.submitForm(url)">
                 <div class="form-group">
                     <input type="text" name="url" ng-model="url">
                     <input type="submit" value="Scrape Form">
+                    <strong>Form Id:</strong> {{form.formId}}
                 </div>
             </form>
-            <div ng-show="form.response">
-                <p>Views for this</p>
-                <ul>
-                    <li>list of key/value/type</li>
-                    <li>functional form</li>
-                    <li>HTML</li>
-                </ul>
-                {{form.response}}
+            <div>
+                <h2>Results for form {{form.formId}}</h2>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-click="form.activeTab = 'html'">HTML</button>
+                     <button type="button" class="btn btn-default" ng-click="form.activeTab = 'form'">Form</button>
+                    <button type="button" class="btn btn-default" ng-click="form.activeTab = 'table'">Table</button>
+                </div>
+                <div ng-show="form.activeTab === 'html'">
+                    html
+                </div>
+                <div ng-show="form.activeTab === 'form'">
+                    form
+                </div>
+                <div ng-show="form.activeTab === 'table'">
+                    <h3>Form Fields</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="field in form.formFields.fields">
+                                <td>{{field.name}}</td>
+                                <td>{{field.value}}</td>
+                                <td>{{field.type}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                {{form.formFields}}
             </div>
         </div>
     </div>
