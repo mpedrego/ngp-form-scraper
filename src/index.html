@@ -3,17 +3,29 @@
     <title>NGP Form Scraper</title>
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 </head>
-<body class="ngpApp" controller="formController as form">
+<body ng-app="ngpApp" ng-controller="formController as form">
     <div class="container">
         <div class="page-header">
             <h1>NGP Form Scraper</h1>
         </div>
         <div class="jumbotron">
             <p>Type in the URL to your NGP form below</p>
-            <form novalidate name="mainForm">
-                <input type="text" name="formUrl">
+            {{url}}
+            <form novalidate name="form.mainForm" ng-submit="form.submitForm(url)">
+                <div class="form-group">
+                    <input type="text" name="url" ng-model="url">
+                    <input type="submit" value="Scrape Form">
+                </div>
             </form>
-
+            <div ng-show="form.response">
+                <p>Views for this</p>
+                <ul>
+                    <li>list of key/value/type</li>
+                    <li>functional form</li>
+                    <li>HTML</li>
+                </ul>
+                {{form.response}}
+            </div>
         </div>
     </div>
 
