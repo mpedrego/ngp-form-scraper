@@ -1,10 +1,21 @@
 <html>
 <head>
-    <title>Test</title>
+    <title>NGP Form Scraper</title>
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body class="ngpApp" controller="formController as form">
-    <h1>Success!</h1>
+    <div class="container">
+        <div class="page-header">
+            <h1>NGP Form Scraper</h1>
+        </div>
+        <div class="jumbotron">
+            <p>Type in the URL to your NGP form below</p>
+            <form novalidate name="mainForm">
+                <input type="text" name="formUrl">
+            </form>
+
+        </div>
+    </div>
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="site.js"></script>
