@@ -8,14 +8,15 @@
         <div class="page-header">
             <h1>NGP Form Scraper</h1>
         </div>
-        <div class="jumbotron">
+        <div>
             <!-- https://act.myngp.com/Forms/7944614294361016320 -->
             <div class="row">
-                <form novalidate name="form.mainForm" ng-submit="form.mainForm.$valid form.mainForm.$dirty && form.submitForm(url)" class="col-sm-8" ng-class="{'has-error': form.mainForm.$invalid && form.mainForm.$dirty}">
+                <form novalidate name="form.mainForm" ng-submit="form.mainForm.$valid && form.mainForm.$dirty && form.submitForm(form.formId)" class="col-sm-8" ng-class="{'has-error': form.mainForm.$invalid && form.mainForm.$dirty}">
                     <div class="form-group">
-                        <label class="control-label">Type in the URL to your NGP form below 
-                        </label>
-                        <input type="text" name="url" ng-model="url" ng-pattern="/^https:\/\/act\.myngp\.com\/Forms\/-?[0-9]{10,}$/" class="form-control">
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon3">https://act.myngp.com/Forms/</span>
+                          <input type="text" class="form-control" ng-model="form.formId" id="basic-url" aria-describedby="basic-addon3">
+                        </div>
                         <div class="help-block bg-danger" ng-show="form.mainForm.$invalid && form.mainForm.$dirty">
                             URL must match pattern https://act.myngp.com/Forms/[formID]
                         </div>
@@ -27,10 +28,12 @@
 
                 <div ng-show="form.formFields.fields" class="col-sm-8">
                     <h2>Results for form {{form.formId}}</h2>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default" ng-click="form.activeTab = 'html'">HTML</button>
-                         <button type="button" class="btn btn-default" ng-click="form.activeTab = 'form'">Form</button>
-                        <button type="button" class="btn btn-default" ng-click="form.activeTab = 'table'">Table</button>
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" ng-click="form.activeTab = 'html'">HTML</button>
+                             <button type="button" class="btn btn-default" ng-click="form.activeTab = 'form'">Form</button>
+                            <button type="button" class="btn btn-default" ng-click="form.activeTab = 'table'">Table</button>
+                        </div>
                     </div>
                     <div ng-show="form.activeTab === 'html'">
                         <textarea class="form-control" rows="5">
