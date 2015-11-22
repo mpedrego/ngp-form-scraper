@@ -31,7 +31,7 @@
             </div>
             <div class="row">
 
-                <div ng-show="form.formFields.fields" class="col-sm-8">
+                <div ng-show="form.formFields" class="col-sm-8">
                     <h2>Results for form {{form.formId}}</h2>
                     <div class="btn-toolbar">
                         <div class="btn-group">
@@ -43,7 +43,7 @@
                     <div ng-show="form.activeTab === 'html'">
                         <div style="height: 200px; overflow: scroll;">
                            &lt;form method="POST" action="https://act.myngp.com/Forms/NoScript/{{form.formId}}"&gt;
-                                <span ng-repeat="field in form.formFields.fields">
+                                <span ng-repeat="field in form.formFields">
                                     <span ng-show="field.type !== 'hidden'">
                                         &lt;div class="form-group"&gt;
                                             &lt;label&gt;{{field.name}}&lt;/label&gt;
@@ -60,7 +60,7 @@
                     </div>
                     <div ng-show="form.activeTab === 'form'">
                         <form novalidate method="POST" ng-action="https://act.myngp.com/Forms/NoScript/{{form.formId}}">
-                            <div class="form-group" ng-repeat="field in form.formFields.fields">
+                            <div class="form-group" ng-repeat="field in form.formFields">
                                 <label ng-show="field.type !== 'hidden'" class="control-label">{{field.name}}</label>
                                 <input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}" class="form-control">
                             </div>
@@ -78,7 +78,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="field in form.formFields.fields">
+                                <tr ng-repeat="field in form.formFields">
                                     <td>{{field.name}}</td>
                                     <td>{{field.value}}</td>
                                     <td>{{field.type}}</td>
