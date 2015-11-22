@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div ng-show="form.activeTab === 'html'">
-                        <textarea class="form-control" rows="5">
+                        <div style="height: 200px; overflow: scroll;">
                            &lt;form method="POST" action="https://act.myngp.com/Forms/NoScript/{{form.formId}}"&gt;
                                 <span ng-repeat="field in form.formFields.fields">
                                     <span ng-show="field.type !== 'hidden'">
@@ -51,7 +51,7 @@
                                 </span>
                                 &lt;input type="submit"&gt;
                             &lt;/form&gt; 
-                        </textarea>
+                        </div>
                     </div>
                     <div ng-show="form.activeTab === 'form'">
                         <form novalidate method="POST" ng-action="https://act.myngp.com/Forms/NoScript/{{form.formId}}">
