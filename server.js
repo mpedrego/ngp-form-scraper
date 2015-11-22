@@ -21,30 +21,31 @@ app.get('/api', function(req, res) {
         if (!error) {
             var $ = cheerio.load(html);
 
-            var json = {
-                version: '',
-                formId: '',
-                tenantName: '',
-                formType: '',
-                fields: []
-            };
-
-            json.version =  $('#Version').val();
-            json.formId =  $('#id').val();
-            json.tenantName =  $('#TenantName').val();
-            json.formType =  $('#formType').val();
-            
-
-
             var fields = $('form').serializeArray();
 
             var newFields = fields.map(function(field) {
-                var thisType = $('[name="' + field.name + '"]').attr('type');
+                var $thisSelector = $('[name="' + field.name + '"]');
+                    thisType = $thisSelector.attr('type'),
+                    thisTag = $thisSelector[0].name;
+
+
                 field.type = thisType;
+                field.tag = thisTag;
+
+                /*if (thisTag === 'select' ) {
+
+                    field.options = [];
+
+                    $thisSelector.find('option').forEach(function(option) {
+                        field.options.push(option.val());
+
+                    });
+                }*/
+
                 return field;
             });
 
-            json.fields = newFields;
+            json = newFields;
 
             // Finally, we'll just send out a message to the browser reminding you that this app does not have a UI.
             res.send(json);
