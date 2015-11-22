@@ -32,15 +32,15 @@ app.get('/api', function(req, res) {
                 field.type = thisType;
                 field.tag = thisTag;
 
-                /*if (thisTag === 'select' ) {
-
+                if (thisTag === 'select' ) {
                     field.options = [];
 
-                    $thisSelector.find('option').forEach(function(option) {
-                        field.options.push(option.val());
-
+                    $thisSelector.children().each(function(i, el) {
+                        if (el.attribs.value !== '') {
+                            field.options.push(el.attribs.value);
+                        }
                     });
-                }*/
+                }
 
                 return field;
             });
