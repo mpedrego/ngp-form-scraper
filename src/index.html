@@ -9,74 +9,81 @@
             <h1>NGP Form Scraper</h1>
         </div>
         <div class="jumbotron">
-            <p>Type in the URL to your NGP form below</p>
             <!-- https://act.myngp.com/Forms/7944614294361016320 -->
-            <form novalidate name="form.mainForm" ng-submit="form.submitForm(url)">
-                <div class="form-group">
-                    <input type="text" name="url" ng-model="url">
-                    <input type="submit" value="Scrape Form">
-                    <strong>Form Id:</strong> {{form.formId}}
-                </div>
-            </form>
-            <div>
-                <h2>Results for form {{form.formId}}</h2>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-click="form.activeTab = 'html'">HTML</button>
-                     <button type="button" class="btn btn-default" ng-click="form.activeTab = 'form'">Form</button>
-                    <button type="button" class="btn btn-default" ng-click="form.activeTab = 'table'">Table</button>
-                </div>
-                <div ng-show="form.activeTab === 'html'">
-                    <pre>
-                       &lt;form method="POST" action="https://act.myngp.com/Forms/NoScript/{{form.formId}}"&gt;
-                            <span ng-repeat="field in form.formFields.fields">
-                                <span ng-show="field.type !== 'hidden'">
-                                    &lt;div class="form-group"&gt;
-                                        &lt;label&gt;{{field.name}}&lt;/label&gt;
+            <div class="row">
+                <form novalidate name="form.mainForm" ng-submit="form.submitForm(url)" class="col-sm-8">
+                    <div class="form-group">
+                        <label class="control-label">Type in the URL to your NGP form below 
+                        </label>
+                        <input type="text" name="url" ng-model="url" ng-pattern="/^https:\/\/act\.myngp\.com\/Forms\/-?[0-9]{10,}$/" class="form-control">
+                    </div>
+                    <input type="submit" value="Scrape Form" class="btn btn-primary">
+                </form>
+            </div>
+            <div class="row">
+
+                <div ng-show="form.formFields.fields" class="col-sm-8">
+                    <h2>Results for form {{form.formId}}</h2>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" ng-click="form.activeTab = 'html'">HTML</button>
+                         <button type="button" class="btn btn-default" ng-click="form.activeTab = 'form'">Form</button>
+                        <button type="button" class="btn btn-default" ng-click="form.activeTab = 'table'">Table</button>
+                    </div>
+                    <div ng-show="form.activeTab === 'html'">
+                        <textarea class="form-control" rows="5">
+                           &lt;form method="POST" action="https://act.myngp.com/Forms/NoScript/{{form.formId}}"&gt;
+                                <span ng-repeat="field in form.formFields.fields">
+                                    <span ng-show="field.type !== 'hidden'">
+                                        &lt;div class="form-group"&gt;
+                                            &lt;label&gt;{{field.name}}&lt;/label&gt;
+                                            &lt;input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}"&gt;
+                                        &lt;/div&gt;
+                                    </span>
+                                    <span ng-show="field.type === 'hidden'">
                                         &lt;input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}"&gt;
-                                    &lt;/div&gt;
+                                    </span>
                                 </span>
-                                <span ng-show="field.type === 'hidden'">
-                                    &lt;input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}"&gt;
-                                </span>
-                            </span>
-                            &lt;input type="submit"&gt;
-                        &lt;/form&gt; 
-                    </pre>
+                                &lt;input type="submit"&gt;
+                            &lt;/form&gt; 
+                        </textarea>
+                    </div>
+                    <div ng-show="form.activeTab === 'form'">
+                        <form novalidate method="POST" ng-action="https://act.myngp.com/Forms/NoScript/{{form.formId}}">
+                            <div class="form-group" ng-repeat="field in form.formFields.fields">
+                                <label ng-show="field.type !== 'hidden'" class="control-label">{{field.name}}</label>
+                                <input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}" class="form-control">
+                            </div>
+                            <input type="submit" class="btn btn-primary">
+                        </form>
+                    </div>
+                    <div ng-show="form.activeTab === 'table'">
+                        <h3>Form Fields</h3>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Value</th>
+                                    <th>Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="field in form.formFields.fields">
+                                    <td>{{field.name}}</td>
+                                    <td>{{field.value}}</td>
+                                    <td>{{field.type}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div ng-show="form.activeTab === 'form'">
-                    <form novalidate method="POST" ng-action="https://act.myngp.com/Forms/NoScript/{{form.formId}}">
-                        <div class="form-group" ng-repeat="field in form.formFields.fields">
-                            <label ng-show="field.type !== 'hidden'">{{field.name}}</label>
-                            <input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}">
-                        </div>
-                        <input type="submit">
-                    </form>
-                </div>
-                <div ng-show="form.activeTab === 'table'">
-                    <h3>Form Fields</h3>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Value</th>
-                                <th>Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="field in form.formFields.fields">
-                                <td>{{field.name}}</td>
-                                <td>{{field.value}}</td>
-                                <td>{{field.type}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-
-                {{form.formFields}}
             </div>
         </div>
     </div>
+    <footer class="footer">
+        <div class="container">
+            footer goes here.
+        </div>
+    </footer>
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="site.js"></script>

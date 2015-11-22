@@ -5,8 +5,9 @@ var cheerio = require('cheerio');
 var app = express();
 var environment = process.env.NODE_ENV;
 
-    app.use('/', express.static('./src/index.html'));
-    app.use(express.static('./src/'));
+
+app.use('/', express.static('./src/index.html'));
+app.use(express.static('./src/'));
 
 
 app.get('/api', function(req, res) {
