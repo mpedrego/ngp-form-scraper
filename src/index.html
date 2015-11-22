@@ -15,10 +15,10 @@
                     <div class="form-group">
                         <div class="input-group">
                           <span class="input-group-addon" id="basic-addon3">https://act.myngp.com/Forms/</span>
-                          <input type="text" class="form-control" ng-model="form.formId" id="basic-url" aria-describedby="basic-addon3">
+                          <input type="text" class="form-control" ng-model="form.formId" id="basic-url" ng-pattern="/^-?[0-9]{12,}$/" aria-describedby="basic-addon3">
                         </div>
                         <div class="help-block bg-danger" ng-show="form.mainForm.$invalid && form.mainForm.$dirty">
-                            URL must match pattern https://act.myngp.com/Forms/[formID]
+                            Form id must be an integer.
                         </div>
                     </div>
                     <input type="submit" value="Scrape Form" class="btn btn-primary">
