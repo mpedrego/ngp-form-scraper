@@ -11,11 +11,14 @@
         <div class="jumbotron">
             <!-- https://act.myngp.com/Forms/7944614294361016320 -->
             <div class="row">
-                <form novalidate name="form.mainForm" ng-submit="form.submitForm(url)" class="col-sm-8">
+                <form novalidate name="form.mainForm" ng-submit="form.mainForm.$valid form.mainForm.$dirty && form.submitForm(url)" class="col-sm-8" ng-class="{'has-error': form.mainForm.$invalid && form.mainForm.$dirty}">
                     <div class="form-group">
                         <label class="control-label">Type in the URL to your NGP form below 
                         </label>
                         <input type="text" name="url" ng-model="url" ng-pattern="/^https:\/\/act\.myngp\.com\/Forms\/-?[0-9]{10,}$/" class="form-control">
+                        <div class="help-block bg-danger" ng-show="form.mainForm.$invalid && form.mainForm.$dirty">
+                            URL must match pattern https://act.myngp.com/Forms/[formID]
+                        </div>
                     </div>
                     <input type="submit" value="Scrape Form" class="btn btn-primary">
                 </form>
