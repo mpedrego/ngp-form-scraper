@@ -34,6 +34,7 @@ app.get('/api', function(req, res) {
 
                 if (thisTag === 'select' ) {
                     field.options = [];
+                    field.type = 'select';
 
                     $thisSelector.children().each(function(i, el) {
                         if (el.attribs.value !== '') {
