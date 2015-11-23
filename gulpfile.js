@@ -12,10 +12,10 @@ var reload = browserSync.reload;
 var nodemon = require('gulp-nodemon');
 
 gulp.task('sass', function () {
-    gulp.src('app/assets/sass/**/*')
+    gulp.src('src/assets/sass/*')
         .pipe(sass({outputStyle: 'compressed'}))
         .pipe(concat('styles.css'))
-        .pipe(gulp.dest('app/assets/css'));
+        .pipe(gulp.dest('src/assets/css'));
 });
 
 gulp.task('browser-sync', ['nodemon'], function() {
@@ -66,6 +66,6 @@ gulp.task('nodemon', function (cb) {
 });
 
 gulp.task('default', ['sass', 'browser-sync'], function () {
-    gulp.watch("app/assets/sass/*/*.scss", ['sass']);
+    gulp.watch("src/assets/sass/*.scss", ['sass']);
     gulp.watch('src/**', reload);
 });

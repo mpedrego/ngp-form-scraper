@@ -8,11 +8,6 @@
     function formController($http) {
         var vm = this;
 
-        function getFormId(url) {
-
-
-        }
-
         vm.activeTab = 'html';
 
         vm.submitForm = function(formId) {
@@ -24,7 +19,6 @@
                     formId: formId
                 }
             }).then(function(response) {
-                console.log(response.data);
                 vm.formFields = response.data;
             });
         }
