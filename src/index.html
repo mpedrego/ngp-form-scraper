@@ -31,7 +31,6 @@
                 </form>
             </div>
             <div class="">
-
                 <div ng-show="form.formFields" class="col-sm-8">
                     <h2>Results for form {{form.formId}}</h2>
                     <div class="btn-toolbar">
@@ -67,9 +66,7 @@
                                     <input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}" class="form-control">
                                 </div>
                                 <div ng-if="field.tag = 'select'">
-                                    <select type="{{field.type}}" name="{{field.name}}" class="form-control">
-                                        <option></option>
-                                    </select>
+                                    <select type="{{field.type}}" name="{{field.name}}" class="form-control" ng-options="o as o for o in form.test"></select>
                                 </div>
                             </div>
                             <input type="submit" class="btn btn-primary">

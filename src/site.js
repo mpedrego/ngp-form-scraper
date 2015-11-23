@@ -10,6 +10,8 @@
 
         vm.activeTab = 'html';
 
+        vm.test = ['1','2','3','4','5','6','7'];
+
         vm.submitForm = function(formId) {
 
             $http({
