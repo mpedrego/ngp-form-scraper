@@ -66,7 +66,7 @@
                                     <input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}" class="form-control">
                                 </div>
                                 <div ng-if="field.tag = 'select'">
-                                    <select type="{{field.type}}" name="{{field.name}}" class="form-control" ng-options="o as o for o in form.test"></select>
+                                    <select type="{{field.type}}" name="{{field.name}}" class="form-control" ng-options="o as o for o in field.options"></select>
                                 </div>
                             </div>
                             <input type="submit" class="btn btn-primary">
