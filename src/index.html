@@ -35,8 +35,8 @@
                     <h2>Results for form {{form.formId}}</h2>
                     <div class="btn-toolbar">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" ng-click="form.activeTab = 'html'">HTML</button>
-                            <button type="button" class="btn btn-default" ng-click="form.activeTab = 'table'">Table</button>
+                            <button type="button" class="btn btn-default" ng-click="form.activeTab = 'html'" ng-class="{'active': form.activeTab === 'html'}">HTML</button>
+                            <button type="button" class="btn btn-default" ng-click="form.activeTab = 'table'" ng-class="{'active': form.activeTab === 'table'}">Table</button>
                         </div>
                     </div>
                     <div ng-show="form.activeTab === 'html'">
