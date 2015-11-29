@@ -62,11 +62,11 @@
                         <form novalidate method="POST" ng-action="https://act.myngp.com/Forms/NoScript/{{form.formId}}">
                             <div class="form-group" ng-repeat="field in form.formFields">
                                 <label ng-show="field.type !== 'hidden'" class="control-label">{{field.name}}</label>
-                                <div ng-if="field.tag = 'input'">
+                                <div ng-if="field.tag === 'input'">
                                     <input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}" class="form-control">
                                 </div>
-                                <div ng-if="field.tag = 'select'">
-                                    <select type="{{field.type}}" name="{{field.name}}" class="form-control" ng-options="o as o for o in field.options"></select>
+                                <div ng-if="field.tag === 'select'">
+                                    <select name="{{field.name}}" ng-model="select" class="form-control" ng-options="option for option in field.options"></select>
                                 </div>
                             </div>
                             <input type="submit" class="btn btn-primary">
