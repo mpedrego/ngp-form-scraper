@@ -44,7 +44,7 @@
                         <div class="results-html">
                            &lt;form method="POST" action="https://act.myngp.com/Forms/NoScript/{{form.formId}}"&gt;
                                 <span ng-repeat="field in form.formFields">
-                                    <span ng-show="field.type !== 'hidden'">
+                                    <span ng-show="field.type !== 'hidden' && field.tag === 'input'">
                                         &lt;div class="form-group"&gt;
                                             &lt;label&gt;{{field.name}}&lt;/label&gt;
                                             &lt;input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}"&gt;
@@ -52,6 +52,13 @@
                                     </span>
                                     <span ng-show="field.type === 'hidden'">
                                         &lt;input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}"&gt;
+                                    </span>
+                                    <span ng-show="field.tag === 'select'">
+                                        &lt;select name="{{field.name}}"&gt;
+                                            <span ng-repeat="option in field.options">
+                                                &lt;option value="{{option}}"&gt; {{option}} &lt;/option&gt;
+                                            </span>
+                                        &lt;/select&gt;
                                     </span>
                                 </span>
                                 &lt;input type="submit"&gt;
