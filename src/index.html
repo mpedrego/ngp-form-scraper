@@ -36,7 +36,6 @@
                     <div class="btn-toolbar">
                         <div class="btn-group">
                             <button type="button" class="btn btn-default" ng-click="form.activeTab = 'html'">HTML</button>
-                             <button type="button" class="btn btn-default" ng-click="form.activeTab = 'form'">Form</button>
                             <button type="button" class="btn btn-default" ng-click="form.activeTab = 'table'">Table</button>
                         </div>
                     </div>
@@ -64,20 +63,6 @@
                                 &lt;input type="submit"&gt;
                             &lt;/form&gt; 
                         </div>
-                    </div>
-                    <div ng-show="form.activeTab === 'form'">
-                        <form novalidate method="POST" ng-action="https://act.myngp.com/Forms/NoScript/{{form.formId}}">
-                            <div class="form-group" ng-repeat="field in form.formFields">
-                                <label ng-show="field.type !== 'hidden'" class="control-label">{{field.name}}</label>
-                                <div ng-if="field.tag === 'input'">
-                                    <input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}" class="form-control">
-                                </div>
-                                <div ng-if="field.tag === 'select'">
-                                    <select name="{{field.name}}" ng-model="select" class="form-control" ng-options="option for option in field.options"></select>
-                                </div>
-                            </div>
-                            <input type="submit" class="btn btn-primary">
-                        </form>
                     </div>
                     <div ng-show="form.activeTab === 'table'">
                         <h3>Form Fields</h3>
