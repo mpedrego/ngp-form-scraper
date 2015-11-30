@@ -19,7 +19,7 @@ module.exports = function(config) {
       'src/bower_components/angular-mocks/angular-mocks.js',
       'src/bower_components/jquery/dist/jquery.js',
       'src/bower_components/jasmine-jquery/lib/jasmine-jquery.js',
-      'src/**/*Spec.js',
+      'src/siteSpec.js',
       'src/site.js',
       'src/index.html',
         {
@@ -39,6 +39,12 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+        '**/*.html': ['ng-html2js']
+    },
+
+    ngHtml2JsPreprocessor: {
+        // strip app from the file path
+        stripPrefix: 'src/'
     },
 
 
