@@ -11,7 +11,6 @@
         vm.activeTab = 'html';
 
         vm.submitForm = function(formId) {
-
             $http({
                 url: 'http://localhost:3000/api',
                 method: 'GET',
@@ -21,6 +20,10 @@
             }).then(function(response) {
                 vm.formFields = response.data;
             });
+        }
+
+        vm.reset = function() {
+            vm.formFields = false;
         }
 
 

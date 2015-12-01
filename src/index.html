@@ -15,8 +15,7 @@
             <h1>NGP Form Scraper</h1>
         </div>
         <div>
-            <!-- https://act.myngp.com/Forms/7944614294361016320 -->
-            <div class="row">
+            <div class="row" ng-hide="form.formFields">
                 <form novalidate name="form.mainForm" ng-submit="form.mainForm.$valid && form.mainForm.$dirty && form.submitForm(form.formId)" class="col-sm-8" ng-class="{'has-error': form.mainForm.$invalid && form.mainForm.$dirty}">
                     <div class="form-group">
                         <div class="input-group">
@@ -87,6 +86,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <button class="btn btn-danger" ng-click="form.reset()">Reset</button>
                 </div>
             </div>
         </div>
