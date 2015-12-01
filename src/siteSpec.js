@@ -1,15 +1,15 @@
 describe("ngpApp", function() {
   beforeEach(module("ngpApp"));
 
-  describe("/ route", function() {
-    it('should load the template',
+  describe("formController", function() {
+    it('should load controller',
     inject(function($location, $rootScope, $httpBackend, $route) {
-      $httpBackend.expectGET('http://stuartdotson.com/sunlightapi/candidates_json.php').respond({});
+      $httpBackend.expectGET('http://localhost:3000/api').respond({});
 
-      /*$rootScope.$apply(function() {
-          $location.path('/');
-      });*/
-      expect($route.current.controller).toBe("formController");
+      $rootScope.$digest();
+      $httpBackend.flush();
+
+      $httpBackend.verifyNoOutstandingRequest();
 
     }));
   });
