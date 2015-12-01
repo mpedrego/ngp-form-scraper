@@ -1,16 +1,20 @@
 describe("ngpApp", function() {
   beforeEach(module("ngpApp"));
 
+  beforeEach(inject(function($controller, $rootScope) {
+    scope = $rootScope.$new();
+    ctrl = $controller('formController', { $scope: scope });
+  }));
+
   describe("formController", function() {
-    it('should load controller',
-    inject(function($location, $rootScope, $httpBackend, $route) {
-      $httpBackend.expectGET('http://localhost:3000/api').respond({});
+    it('should fetch form details', function() {
+        scope.name = "Frederik";
 
-      $rootScope.$digest();
-      $httpBackend.flush();
+        console.log(ctrl);
+        console.log(ctrl.activeTab);
 
-      $httpBackend.verifyNoOutstandingRequest();
-
-    }));
+        scope.$digest();
+        expect(ctrl.activeTab).toBe("html");
+    });
   });
 });
