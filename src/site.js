@@ -24,6 +24,8 @@
 
         vm.reset = function() {
             vm.formFields = false;
+            vm.formId = '';
+            vm.mainForm.$setPristine();
         }
 
 
