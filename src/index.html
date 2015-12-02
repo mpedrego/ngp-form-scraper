@@ -10,14 +10,16 @@
     <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
 </head>
 <body ng-app="ngpApp" ng-controller="formController as form" ng-cloak>
-    <div class="container">
+    <div class="container m-b-lg">
         <div class="page-header">
             <h1>NGP Form Scraper</h1>
+            <p>Get all the form input names and values needed to create your own custom-styled NGP forms.</p>
         </div>
         <div>
             <div class="row" ng-hide="form.formFields">
                 <form novalidate name="form.mainForm" ng-submit="form.mainForm.$valid && form.mainForm.$dirty && form.submitForm(form.formId)" class="col-sm-8" ng-class="{'has-error': form.mainForm.$invalid && form.mainForm.$dirty}">
                     <div class="form-group">
+                        <p>Type in the form id (found in the form URL) below.</p>
                         <div class="input-group">
                           <span class="input-group-addon" id="basic-addon3">https://act.myngp.com/Forms/</span>
                           <input type="text" class="form-control" ng-model="form.formId" id="basic-url" ng-pattern="/^-?[0-9]{12,}$/" aria-describedby="basic-addon3">
@@ -31,6 +33,7 @@
             </div>
             <div>
                 <div ng-show="form.formFields" class="col-sm-8">
+                    <div class="alert alert-success" role="alert">Form successfully scraped.</div>
                     <h2>Results for form {{form.formId}}</h2>
                     <div class="btn-toolbar">
                         <div class="btn-group">
@@ -91,9 +94,9 @@
             </div>
         </div>
     </div>
-    <footer class="footer">
+    <footer class="footer row" style="font-size: 0.8em;">
         <div class="container">
-            footer goes here.
+            <p><a href="https://github.com/sdotson/ngp-form-scraper" target="_blank">Github repository</a></p>
         </div>
     </footer>
 
