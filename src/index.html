@@ -16,7 +16,7 @@
             <p>Get all the form input names and values needed to create your own custom-styled NGP forms.</p>
         </div>
         <div>
-            <div class="row" ng-hide="form.formFields">
+            <div class="row" ng-hide="form.submitted">
                 <form novalidate name="form.mainForm" ng-submit="form.mainForm.$valid && form.mainForm.$dirty && form.submitForm(form.formId)" class="col-sm-8" ng-class="{'has-error': form.mainForm.$invalid && form.mainForm.$dirty}">
                     <div class="form-group">
                         <p>Type in the form id (found in the form URL) below.</p>
@@ -31,63 +31,66 @@
                     <input type="submit" value="Scrape Form" class="btn btn-primary">
                 </form>
             </div>
-            <div class="row" ng-show="form.formFields">
+            <div class="row" ng-show="form.submitted">
                 <div class="col-sm-8">
-                    <div class="alert alert-success" role="alert">Form successfully scraped.</div>
-                    <h2>Results for form {{form.formId}}</h2>
-                    <div class="btn-toolbar">
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default" ng-click="form.activeTab = 'html'" ng-class="{'active': form.activeTab === 'html'}">HTML</button>
-                            <button type="button" class="btn btn-default" ng-click="form.activeTab = 'table'" ng-class="{'active': form.activeTab === 'table'}">Table</button>
+                    <div class="alert alert-success" role="alert" ng-show="form.formFields">Form successfully scraped.</div>
+                    <div class="alert alert-danger" role="alert" ng-show="form.formNotFound">No NGP form with that ID was found. Try again.</div>
+                    <div ng-show="form.formFields">
+                        <h2>Results for form {{form.formId}}</h2>
+                        <div class="btn-toolbar">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default" ng-click="form.activeTab = 'html'" ng-class="{'active': form.activeTab === 'html'}">HTML</button>
+                                <button type="button" class="btn btn-default" ng-click="form.activeTab = 'table'" ng-class="{'active': form.activeTab === 'table'}">Table</button>
+                            </div>
                         </div>
-                    </div>
-                    <div ng-show="form.activeTab === 'html'">
-                        <div class="results-html">
-                           &lt;form method="POST" action="https://act.myngp.com/Forms/NoScript/{{form.formId}}"&gt;
-                                <span ng-repeat="field in form.formFields">
-                                    <span ng-show="field.type !== 'hidden' && field.tag === 'input'">
-                                        &lt;div class="form-group"&gt;
-                                            &lt;label&gt;{{field.name}}&lt;/label&gt;
-                                            &lt;input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}"&gt;
-                                        &lt;/div&gt;
-                                    </span>
-                                    <span ng-show="field.type === 'hidden'">
-                                        &lt;input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}"&gt;
-                                    </span>
-                                    <span ng-show="field.tag === 'select'">
-                                        &lt;select name="{{field.name}}"&gt;
-                                            <span ng-repeat="option in field.options">
-                                                &lt;option value="{{option}}"&gt; {{option}} &lt;/option&gt;
-                                            </span>
-                                        &lt;/select&gt;
-                                    </span>
-                                </span>
-                                &lt;input type="submit"&gt;
-                            &lt;/form&gt; 
-                        </div>
-                    </div>
-                    <div ng-show="form.activeTab === 'table'">
-                        <h3>Form Fields</h3>
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Value</th>
-                                    <th>Type</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="field in form.formFields">
-                                    <td>{{field.name}}</td>
-                                    <td ng-if="field.tag !== 'select'">{{field.value}}</td>
-                                    <td ng-if="field.tag === 'select'">
-                                        <span ng-repeat="option in field.options">{{option}}<span ng-show="!$last">, </span>
+                        <div ng-show="form.activeTab === 'html'">
+                            <div class="results-html">
+                               &lt;form method="POST" action="https://act.myngp.com/Forms/NoScript/{{form.formId}}"&gt;
+                                    <span ng-repeat="field in form.formFields">
+                                        <span ng-show="field.type !== 'hidden' && field.tag === 'input'">
+                                            &lt;div class="form-group"&gt;
+                                                &lt;label&gt;{{field.name}}&lt;/label&gt;
+                                                &lt;input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}"&gt;
+                                            &lt;/div&gt;
                                         </span>
-                                    </td>
-                                    <td>{{field.type}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        <span ng-show="field.type === 'hidden'">
+                                            &lt;input type="{{field.type}}" name="{{field.name}}" value="{{field.value}}"&gt;
+                                        </span>
+                                        <span ng-show="field.tag === 'select'">
+                                            &lt;select name="{{field.name}}"&gt;
+                                                <span ng-repeat="option in field.options">
+                                                    &lt;option value="{{option}}"&gt; {{option}} &lt;/option&gt;
+                                                </span>
+                                            &lt;/select&gt;
+                                        </span>
+                                    </span>
+                                    &lt;input type="submit"&gt;
+                                &lt;/form&gt; 
+                            </div>
+                        </div>
+                        <div ng-show="form.activeTab === 'table'">
+                            <h3>Form Fields</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Value</th>
+                                        <th>Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="field in form.formFields">
+                                        <td>{{field.name}}</td>
+                                        <td ng-if="field.tag !== 'select'">{{field.value}}</td>
+                                        <td ng-if="field.tag === 'select'">
+                                            <span ng-repeat="option in field.options">{{option}}<span ng-show="!$last">, </span>
+                                            </span>
+                                        </td>
+                                        <td>{{field.type}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <button class="btn btn-danger" ng-click="form.reset()">Reset</button>
                 </div>

@@ -14,7 +14,7 @@ app.get('/api', function(req, res) {
 
     /* url format is https://act.myngp.com/Forms/NoScript/-8618499235200825344 */
 
-    var formId = req.query.formId ? req.query.formId : '-8618499235200825344',
+    var formId = req.query.formId,
         formUrl = 'https://act.myngp.com/Forms/NoScript/' + formId;
 
     request(formUrl, function(error, response, html) {
@@ -23,33 +23,37 @@ app.get('/api', function(req, res) {
 
             var fields = $('form').serializeArray();
 
-            var newFields = fields.map(function(field) {
-                var $thisSelector = $('[name="' + field.name + '"]');
-                    thisType = $thisSelector.attr('type'),
-                    thisTag = $thisSelector[0].name;
+            if (fields.length === 0) {
+                res.status(400).json({ error: 'NGP form not found.' })
+            } else {
+                var newFields = fields.map(function(field) {
+                    var $thisSelector = $('[name="' + field.name + '"]');
+                        thisType = $thisSelector.attr('type'),
+                        thisTag = $thisSelector[0].name;
 
 
-                field.type = thisType;
-                field.tag = thisTag;
+                    field.type = thisType;
+                    field.tag = thisTag;
 
-                if (thisTag === 'select' ) {
-                    field.options = [];
-                    field.type = 'select';
+                    if (thisTag === 'select' ) {
+                        field.options = [];
+                        field.type = 'select';
 
-                    $thisSelector.children().each(function(i, el) {
-                        if (el.attribs.value !== '') {
-                            field.options.push(el.attribs.value);
-                        }
-                    });
-                }
+                        $thisSelector.children().each(function(i, el) {
+                            if (el.attribs.value !== '') {
+                                field.options.push(el.attribs.value);
+                            }
+                        });
+                    }
 
-                return field;
-            });
+                    return field;
+                });
 
-            json = newFields;
+                json = newFields;
+                res.send(json);
+            }
 
-            // Finally, we'll just send out a message to the browser reminding you that this app does not have a UI.
-            res.send(json);
+
 
         }
     });
