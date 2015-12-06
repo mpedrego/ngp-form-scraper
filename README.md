@@ -1,6 +1,8 @@
 # ngp-form-scraper
-Scrapes NGP forms to provide everything you need to create a custom form
+Scrapes NGP forms to provide everything you need to create custom forms
 
-This project is currently under development and isn't ready to be used by anyone. My goal is to create an Angular app with a Node/Express backend that will accept any NGP form url you give it and will return all the fields you will need to scrape that form.
+NGP recently changed their API and made it much harder to scrape their forms to create your own custom forms with the html structure of your choosing. Key hidden inputs are no longer easy to find in the form hosted by NGP or rendered by the NGP Action Tag. This app will get around that for all forms except Donation forms.
 
-NGP recently changed their API and made it much harder to scrape their forms to create your own interface that matches the design of your website. This app will get around that.
+NGP Form Scraper is created in AngularJS with a Node/Express backend. The form scraping comes to you courtesy of <a href="https://github.com/cheeriojs/cheerio" target="_blank">Cheerio</a>, which is server-side implementation of jQuery.
+
+NGP Form Scraper is now live at <a href="http://stuartdotson.com/ngp-form-scraper" taret="_blank">http://stuartdotson.com/ngp-form-scraper</a>.

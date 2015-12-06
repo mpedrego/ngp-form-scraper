@@ -14,13 +14,15 @@
     <div class="container m-b-lg">
         <div class="page-header">
             <h1>NGP Form Scraper</h1>
-            <p>Get all the form input names and values needed to create your own custom-styled NGP forms.</p>
+            <p><strong>Get all the form input names and values needed to create custom forms.</strong></p>
+            <p>NGP recently changed their API and made it much harder to scrape their forms to create your own custom forms with the HTML structure of your choosing. Key hidden inputs are no longer easy to find in the form hosted by NGP or rendered by the NGP Action Tag. This app will get around that for all forms except Donation forms.</p>
+            <p><a href="https://github.com/sdotson/ngp-form-scraper" target="_blank">Check out the Github repository &rsaquo;</a></p>
         </div>
         <div>
             <div class="row" ng-hide="form.submitted">
                 <form novalidate name="form.mainForm" ng-submit="form.mainForm.$valid && form.mainForm.$dirty && form.submitForm(form.formId)" class="col-sm-8" ng-class="{'has-error': form.mainForm.$invalid && form.mainForm.$dirty}">
                     <div class="form-group">
-                        <p>Type in the form id (found in the form URL) below.</p>
+                        <p><strong>Type in the form id (found in the form URL) below.</strong></p>
                         <div class="input-group">
                           <span class="input-group-addon" id="basic-addon3">https://act.myngp.com/Forms/</span>
                           <input type="text" class="form-control" ng-model="form.formId" id="basic-url" ng-pattern="/^-?[0-9]{12,}$/" aria-describedby="basic-addon3">
@@ -98,7 +100,6 @@
             </div>
         </div>
     </div>
-
     <script src="bower_components/angular/angular.js"></script>
     <script src="site.js"></script>
 </body>
