@@ -31,6 +31,7 @@
         }
 
         vm.reset = function() {
+            vm.formFields = false;
             vm.formNotFound = false;
             vm.submitted = false;
             vm.formId = '';
