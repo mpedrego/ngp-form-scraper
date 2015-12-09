@@ -18,7 +18,11 @@
             <p>NGP recently changed their API and made it much harder to scrape their forms to create your own custom forms with the HTML structure of your choosing. Key hidden inputs are no longer easy to find in the form hosted by NGP or rendered by the NGP Action Tag. This app will get around that for all forms except Donation forms.</p>
             <p><a href="https://github.com/sdotson/ngp-form-scraper" target="_blank">Check out the Github repository &rsaquo;</a></p>
         </div>
-        <div>
+        <div ng-show="form.loading">
+            <img src="/ajax-loader.gif" class="ajax-loader">
+            <h2 class="loading-text">Scraping Form...</h2>
+        </div>
+        <div ng-hide="form.loading">
             <div class="row" ng-hide="form.submitted">
                 <form novalidate name="form.mainForm" ng-submit="form.mainForm.$valid && form.mainForm.$dirty && form.submitForm(form.formId)" class="col-sm-8" ng-class="{'has-error': form.mainForm.$invalid && form.mainForm.$dirty}">
                     <div class="form-group">

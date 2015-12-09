@@ -1,5 +1,14 @@
 /* custom styles */
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide:not(.ng-hide-animate) {
+    display: none !important;
+}
+
+.loading-text {
+    display: inline-block; 
+    color: #e35839;
+}
+
 .results-html {
     height: 150px; 
     overflow: scroll;

@@ -9,8 +9,10 @@
         var vm = this;
 
         vm.activeTab = 'html';
+        vm.loading = false;
 
         vm.submitForm = function(formId) {
+            vm.loading = true;
             $http({
                 url: 'http://localhost:3000/api',
                 method: 'GET',
@@ -22,6 +24,7 @@
 
         function successCallback(response) {
             vm.submitted = true;
+            vm.loading = false;
             vm.formFields = response.data;
         }
 
