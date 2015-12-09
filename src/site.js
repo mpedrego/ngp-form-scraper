@@ -30,6 +30,7 @@
 
         function errorCallback(response) {
             vm.submitted = true;
+            vm.loading = false;
             vm.formNotFound = true;
         }
 
