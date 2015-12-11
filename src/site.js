@@ -35,6 +35,7 @@
         }
 
         vm.reset = function() {
+            vm.loading = false;
             vm.formFields = false;
             vm.formNotFound = false;
             vm.submitted = false;
