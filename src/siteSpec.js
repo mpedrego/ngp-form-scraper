@@ -25,8 +25,6 @@ describe("ngpApp", function() {
     it('should query the backend when the username is checked',
     inject(function($rootScope, $httpBackend) {
         $httpBackend.expect('GET', 'http://localhost:3000/api?formId=7944614294361016320');
-        
-        var status = false;
 
         ctrl.submitForm("7944614294361016320");
         $httpBackend.flush();
