@@ -26,6 +26,8 @@
             vm.submitted = true;
             vm.loading = false;
             vm.formFields = response.data;
+
+            return response.data;
         }
 
         function errorCallback(response) {
