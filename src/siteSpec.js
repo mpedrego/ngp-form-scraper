@@ -22,7 +22,7 @@ describe("ngpApp", function() {
         expect(ctrl.activeTab).toBe("html");
     });
 
-    it('should query the backend when the username is checked',
+    it('should return form object if form exists',
     inject(function($rootScope, $httpBackend) {
         $httpBackend.expect('GET', 'http://localhost:3000/api?formId=7944614294361016320');
 
@@ -32,6 +32,18 @@ describe("ngpApp", function() {
         expect(ctrl.submitted).toBe(true);
         expect(ctrl.formNotFound).toBe(undefined);
 
+
+        $httpBackend.verifyNoOutstandingRequest();
+    }));
+
+    it('should return error if the form does not exist',
+    inject(function($rootScope, $httpBackend) {
+        $httpBackend.expect('GET', 'http://localhost:3000/api?formId=606060606060606').respond({ error: 'NGP form not found.' });
+
+        ctrl.submitForm("606060606060606");
+        $httpBackend.flush();
+        expect(ctrl.formFields.error).toBeDefined();
+        expect(ctrl.submitted).toBe(true);
 
         $httpBackend.verifyNoOutstandingRequest();
     }));
