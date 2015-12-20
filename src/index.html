@@ -34,7 +34,7 @@
                     <input type="submit" value="Scrape Form" class="btn btn-primary">
                 </form>
             </div>
-            <div class="row" ng-show="form.submitted">
+            <div class="row" ng-show="form.submitted" id="results">
                 <div class="col-sm-8">
                     <div class="alert alert-success" role="alert" ng-show="form.formFields">Form successfully scraped.</div>
                     <div class="alert alert-danger" role="alert" ng-show="form.formNotFound">No NGP form with that ID was found. Try again.</div>
