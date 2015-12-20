@@ -5,7 +5,16 @@ var cheerio = require('cheerio');
 var app = express();
 var environment = process.env.NODE_ENV;
 
+//CORS middleware
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,POST');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
+    next();
+}
+
+app.use(allowCrossDomain);
 app.use('/', express.static('./src/index.html'));
 app.use(express.static('./src/'));
 
